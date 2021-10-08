@@ -7,7 +7,7 @@ import org.devio.rn.splashscreen.SplashScreen; // 추가해주세요.
 public class MainActivity extends ReactActivity {
   @Override // 추가
   protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this); // 추가해주세요.
+    SplashScreen.show(this); 
     super.onCreate(savedInstanceState);
   }
 
