@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "21995980128",
+    "firebase_url": "https://collathon-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "collathon",
+    "storage_bucket": "collathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21995980128:android:2dad0184d5e58bb6558a05",
+        "android_client_info": {
+          "package_name": "com.collathon.MemoMyBody"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21995980128-677kskh2gidni2jt2s96patcuveipvun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNdVf6X9F800VHdcvsdeC0hU8lBsCx1cU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21995980128-677kskh2gidni2jt2s96patcuveipvun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
