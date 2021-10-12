@@ -1,8 +1,10 @@
+// 회원가입 네비게이션
+
 import React from 'react';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
 
-// 회원가입
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Container = styled.View`
     flex: 1;
@@ -11,12 +13,17 @@ const Container = styled.View`
     background-color: ${ ({ theme }) => theme.background };
 `;
 
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 const Signup = () => {
     return (
         <Container>
             <Text style={{ fontSize: 30 }}>Signup Screen</Text>
+          
         </Container>
     );
 };
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 export default Signup;
