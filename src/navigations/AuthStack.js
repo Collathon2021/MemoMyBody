@@ -1,9 +1,9 @@
-// Login , SignUp 네비게이션 관리
+// Navigation 요소들
 
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup } from '../screens';
+import { Login, Signup, Home, Board }   from '../screens';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -28,13 +28,20 @@ const AuthStack = () => {
                 component={Login}
                 //options={{ headerShown: false }}  회원가입 위에 Login 타이틀 없애기            
             />
-            {/* Login 화면 */}
             <Stack.Screen 
                 name="Signup" 
                 component={Signup}
                 options={{ headerBackTitleVisible: false }}
+            />         
+            <Stack.Screen
+                name="Home"
+                component={Home}
             />
-            {/* Sign up 화면 */}
+            <Stack.Screen
+                name="Board"
+                component={Board}
+            />
+            
         </Stack.Navigator>
     );
 };
