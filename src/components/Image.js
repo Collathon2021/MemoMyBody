@@ -1,6 +1,10 @@
+// Image 컴포넌트 (이미지 사용가능)
+
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Container = styled.View`
     align-self: center;
@@ -13,6 +17,8 @@ const StyledImage = styled.Image`
     height: 100px;
 `;
 
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 const Image = ({ url, imageStyle }) => {
     return(
         <Container>
@@ -20,6 +26,8 @@ const Image = ({ url, imageStyle }) => {
         </Container>
     );
 };
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 Image.propTypes = {
     uri: PropTypes.string,
