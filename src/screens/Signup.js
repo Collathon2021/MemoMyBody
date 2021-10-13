@@ -1,5 +1,4 @@
-// 회원가입 네비게이션
-
+// 회원가입 화면
 import React from 'react';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
@@ -19,7 +18,6 @@ const Signup = () => {
     return (
         <Container>
             <Text style={{ fontSize: 30 }}>Signup Screen</Text>
-          
         </Container>
     );
 };
