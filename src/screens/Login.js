@@ -1,4 +1,4 @@
-// 로그인 네비게이션
+// 로그인 화면
 
 import React, { useState, useRef, useEffect } from 'react';
 import { TouchableWithoutFeedback,Keyboard } from 'react-native';
@@ -30,6 +30,7 @@ const Login = ({ navigation }) => {
     const insets = useSafeAreaInsets();   
 
     const _handleLoginButtonPress = () => {};
+
     useEffect(() => {
         setDisabled(!(email && password ));
     }, [email, password]);
@@ -62,8 +63,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        onPress={_handleLoginButtonPress} 
-                        disabled={disabled}
+                        //onPress={_handleLoginButtonPress}
+                        onPress = {() => navigation.navigate('Home')} 
+                        //disabled={disabled}
                     />
                     <Button
                         title="Sign up"
