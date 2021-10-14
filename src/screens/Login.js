@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <Container insets={insets}>
-                    <Image url={images.logo} imageStyle={{ borderRadius: 8 }}/>
+                    <Image url={images.Loginlogo} imageStyle={{ borderRadius: 8 }}/>
                     <Input
                         label="Id"
                         value={email}
@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
                         title="Login" 
                         //onPress={_handleLoginButtonPress}
                         onPress = {() => navigation.navigate('Home')} 
-                        //disabled={disabled}
+                        //disabled={disabled} DB완성후 구현예정
                     />
                     <Button
                         title="Sign up"
