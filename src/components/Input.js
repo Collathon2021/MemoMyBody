@@ -47,7 +47,7 @@ const Input = forwardRef(
                 ref={ref}
                 isFocused={isFocused}
                 value={value}
-                onChageText={onChangeText}
+                onChangeText={onChangeText}
                 onSubmitEditing={onSubmitEditing}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => {
@@ -77,7 +77,7 @@ Input.defaultProps = {
 Input.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-    onChageText: PropTypes.func.isRequired,
+    onChangeText: PropTypes.func.isRequired,
     onSubmitEditing: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
     placeholder: PropTypes.string,
