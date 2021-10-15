@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+// Input 컴포넌트 (입력 박스)
+
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Container = styled.View`
     flex-direction: column;
@@ -27,16 +31,20 @@ const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
     border-radius: 4px;
 `;
 
-const Input = ({
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
+const Input = forwardRef(
+    ({
     label, value, onChangeText, onSubmitEditing, onBlur,
     placeholder, isPassword, returnKeyType, maxLength,
-}) => {
+    },ref) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return(
         <Container>
             <Label isFocused={isFocused}>{label}</Label>
             <StyledTextInput
+                ref={ref}
                 isFocused={isFocused}
                 value={value}
                 onChageText={onChangeText}
@@ -57,7 +65,10 @@ const Input = ({
             />
         </Container>
     );
-};
+    }
+);
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 Input.defaultProps = {
     onBlur: () => {},
