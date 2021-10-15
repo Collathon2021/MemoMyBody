@@ -3,7 +3,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Board, Community, Post }   from '../screens';
+import { Login, Signup, Home, Board, Community, Post, PostEditor }   from '../screens';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -50,6 +50,10 @@ const AuthStack = () => {
                 name="Post"
                 component={Post}
                 
+            />
+            <Stack.Screen
+                name="PostEditor"
+                component={PostEditor}
             />
 
             
