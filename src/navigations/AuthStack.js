@@ -3,8 +3,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Board }   from '../screens';
-
+import { Login, Signup, Board, Home} from '../screens';
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Stack = createStackNavigator();
