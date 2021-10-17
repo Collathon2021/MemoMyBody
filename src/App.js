@@ -1,16 +1,10 @@
-import React, { Component, useEffect } from 'react';
+import React , { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { StatusBar, Text, StyleSheet, View, Button, TouchableOpacity } from 'react-native';
+import { StatusBar, Image } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
+import Navigation from './navigations/index';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import HomePage from './homepage/HomePage';
-import Board from './borad/Borad';
-
-
-const Stack = createStackNavigator();
 
 const App = () => {
     useEffect(() => { /* Splash 화면 일정시간 후 닫히게 */
