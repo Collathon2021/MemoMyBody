@@ -4,6 +4,7 @@ import { StatusBar, Image } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import Navigation from './navigations/index';
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
     useEffect(() => { /* Splash 화면 일정시간 후 닫히게 */
@@ -21,5 +22,6 @@ const App = () => {
         </ThemeProvider>
     );
 };
+
 
 export default App;
