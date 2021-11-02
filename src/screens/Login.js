@@ -1,12 +1,14 @@
 // 로그인 화면
 
 import React, { useState, useRef, useEffect } from 'react';
-import { TouchableWithoutFeedback,Keyboard } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image, Input, Button } from '../components';
-import { images } from '../utils/images'
+import { images } from '../utils/images';
+import db from '../../test/db';
+
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -29,11 +31,16 @@ const Login = ({ navigation }) => {
     const passwordRef = useRef();
     const insets = useSafeAreaInsets();   
 
+    /* 동기적 동작 처리를 하기 위해 js는 기본적으로 비동기 처리
+    async/await 처리를
+
     const _handleLoginButtonPress = () => {};
+
+    */
 
     useEffect(() => {
         setDisabled(!(email && password ));
-    }, [email, password]);
+    }, [email, password]); 
 
     return(
         <KeyboardAwareScrollView

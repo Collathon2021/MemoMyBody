@@ -5,3 +5,4 @@ import api from './api'
 
 const firebaseApp = !firebase.apps.length?firebase.initializeApp(api):firebase.app()
 export default firebaseApp.firestore()
+
