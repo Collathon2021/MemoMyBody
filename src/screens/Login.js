@@ -39,8 +39,8 @@ const Login = ({ navigation }) => {
     */
 
     useEffect(() => {
-        setDisabled(!(email && password ));
-    }, [email, password]); 
+        setDisabled(!(email && password ) );
+    }, [email, password]);
 
     return(
         <KeyboardAwareScrollView
@@ -71,6 +71,11 @@ const Login = ({ navigation }) => {
                     <Button 
                         title="Login" 
                         //onPress={_handleLoginButtonPress}
+                        //onPress = {() => navigation.navigate('Home')} 
+                        /// TODO: 임시로 게시판으로 이동시켜뒀습니다
+                        // onPress = {() => navigation.navigate('Community')} 
+
+                        //disabled={disabled}
                         onPress = {() => navigation.navigate('Home')} 
                         //disabled={disabled} DB완성후 구현예정
                     />
