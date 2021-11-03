@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
     const _handleLoginButtonPress = () => {};
 
     useEffect(() => {
-        setDisabled(!(email && password ));
+        setDisabled(!(email && password ) );
     }, [email, password]);
 
     return(
