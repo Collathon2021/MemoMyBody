@@ -2,9 +2,13 @@
 
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components/native';
-import { Image, Input, Button } from '../components';
+import { Image, Input, Button } from '../../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { images } from '../utils/images'
+import { images } from '../../utils/images'
+import { _handleSignupButtonPress } from './LoginFB';
+import { Alert } from 'react-native';
+import db from '../../../test/db';
+
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -27,7 +31,7 @@ const ErrorText = styled.Text`
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
-const Signup = () => {
+const Signup = ({navigation}) => {
     const [name,setName] = useState('');
     const [id,setId] = useState('');
     const [password,setPassword] = useState('');
@@ -61,7 +65,31 @@ const Signup = () => {
         );
     }, [name, id, password, passwordConfirm, errorMessage]);
 
-    const _handleSignupButtonPress = () => {};
+
+    const _handleSignupButtonPress = (name, id, pw) => {
+        try {
+        db.collection('user')
+            .doc(id)
+            .get()
+            .then(doc => {
+            if (!doc.data()) {
+                db.collection('user')
+                .doc(id)
+                .set({
+                    name: name,
+                    userPW: pw,
+                    }); 
+                Alert.alert('SignUp Success',`${name}님 환영합니다.`);
+                navigation.navigate('Login');
+            } else { 
+                //등록된 유저일 경우
+                Alert.alert('SignUp Fail',`이미 사용중인 ID입니다.`);
+            }
+            })
+        } catch (e) {
+            Alert.alert('SignUp Fail',e.message);
+        }
+    };
 
     return(
         <KeyboardAwareScrollView extraScrollHeight={20}>
@@ -103,20 +131,21 @@ const Signup = () => {
                     isPassword
                 />
                 <Input
-                ref={passwordConfirmRef}
-                label="Password Confirm"
-                value={passwordConfirm}
-                onChangeText={text => setPasswordConfirm(removeWhitespace(text))}
-                onSubmitEditing={_handleSignupButtonPress}
-                placeholder="Password"
-                returnKeyType="done"
+                    ref={passwordConfirmRef}
+                    label="Password Confirm"
+                    value={passwordConfirm}
+                    onChangeText={text => setPasswordConfirm(text)}
+                    onSubmitEditing={() => _handleSignupButtonPress(name,id,password)}
+                    placeholder="Password"
+                    returnKeyType="done"
+                    isPassword
                 />
                 <ErrorText>{errorMessage}</ErrorText>
                 <Button
                     title="Signup"
-                    onPress={_handleSignupButtonPress}
+                    onPress={() => _handleSignupButtonPress(name,id,password)}
                     disabled={disabled}
-                />
+                /> 
             </Container>
         </KeyboardAwareScrollView>
     );
