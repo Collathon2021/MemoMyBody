@@ -5,10 +5,10 @@ import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Image, Input, Button } from '../components';
-import { images } from '../utils/images';
-import db from '../../test/db';
-
+import { Image, Input, Button } from '../../components';
+import { images } from '../../utils/images';
+//import { _handleLoginButtonPress } from './LoginFB';
+import db from '../../../test/db';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -29,18 +29,34 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
     const passwordRef = useRef();
-    const insets = useSafeAreaInsets();   
-
-    /* 동기적 동작 처리를 하기 위해 js는 기본적으로 비동기 처리
-    async/await 처리를
-
-    const _handleLoginButtonPress = () => {};
-
-    */
+    const insets = useSafeAreaInsets();       
 
     useEffect(() => {
-        setDisabled(!(email && password ) );
+        setDisabled(!(email && password ));
     }, [email, password]);
+
+    const _handleLoginButtonPress = (id,pw) => {
+        try {
+        db.collection('user')
+            .doc(id)
+            .get()
+            .then(doc => {
+                if(!doc.data()) { 
+                // id가 없음
+                Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);                   
+                } else {
+                    if(doc.data().userPW === pw) {
+                        Alert.alert('Login Success',`환영합니다 ! ${doc.data().name}님`);
+                        navigation.navigate('Home');
+                    } else {
+                        Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);
+                    }
+                }
+            })
+        } catch(e) {
+            Alert.alert('Login Error',e.message);
+        }
+    };
 
     return(
         <KeyboardAwareScrollView
@@ -53,7 +69,7 @@ const Login = ({ navigation }) => {
                     <Input
                         label="Id"
                         value={email}
-                        onChangeText={text => setEmail(text)}
+                        onChangeText={email => setEmail(email)}
                         onSubmitEditing = {() => passwordRef.current.focus()}
                         placeholder = "Id"
                         returnKeyType = "next"
@@ -62,7 +78,7 @@ const Login = ({ navigation }) => {
                         ref={passwordRef}
                         label="Password"
                         value={password}
-                        onChangeText={text => setPassword(text)}
+                        onChangeText={password => setPassword(password)}
                         onSubmitEditing = {() => {}}
                         placeholder = "Password"
                         returnKeyType = "done"
@@ -70,14 +86,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        //onPress={_handleLoginButtonPress}
+                        onPress={() => _handleLoginButtonPress(email,password)}
+                        disabled={disabled}
                         //onPress = {() => navigation.navigate('Home')} 
-                        /// TODO: 임시로 게시판으로 이동시켜뒀습니다
-                        // onPress = {() => navigation.navigate('Community')} 
-
-                        //disabled={disabled}
-                        onPress = {() => navigation.navigate('Home')} 
-                        //disabled={disabled} DB완성후 구현예정
                     />
                     <Button
                         title="Sign up"
