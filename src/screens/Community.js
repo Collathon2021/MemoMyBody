@@ -25,8 +25,6 @@ const Community =({route, navigation})=>{
                 if(text1.current)
                     text1.current.clear();
             })
-
-        
         }
         catch(error){
             alert(error.toString());
