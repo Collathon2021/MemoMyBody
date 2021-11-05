@@ -3,7 +3,9 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Board, Home} from '../screens';
+import { Login, Signup, Home, Board, Community}   from '../screens';
+import { Text, StyleSheet, View, TouchableOpacity, SectionList} from 'react-native';
+
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Stack = createStackNavigator();
@@ -12,10 +14,9 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     const theme = useContext(ThemeContext);
-
     return(
         <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName= "Login"
             screenOptions={{
                 headerTitleAlign: 'center',
                 cardStyle: { backgroundColor: theme.backgroundColor },
@@ -40,7 +41,11 @@ const AuthStack = () => {
                 name="Board"
                 component={Board}
             />
-            
+            <Stack.Screen
+                name="Community"
+                component={Community}
+            />
+
         </Stack.Navigator>
     );
 };
