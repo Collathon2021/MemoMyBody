@@ -89,7 +89,7 @@ const BottomHome = ({data}) =>{
             }
         />
     </View>
-    );ㄹ
+    );
 }
 
 
