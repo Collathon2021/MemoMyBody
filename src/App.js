@@ -6,6 +6,10 @@ import { theme } from './theme';
 import Navigation from './navigations/index';
 import { NavigationContainer } from '@react-navigation/native';
 
+
+import CameraScreen from '../test/CameraScreen';
+
+
 const App = () => {
     useEffect(() => { /* Splash 화면 일정시간 후 닫히게 */
         setTimeout(() => {
@@ -18,6 +22,7 @@ const App = () => {
             <StatusBar barStyle="dark-content" /> 
             {/* 휴대폰 최상단 설정 */} 
             <Navigation />
+            {/* <CameraScreen/> */}
             {/* Navigation 컴포넌트 호출 */}
         </ThemeProvider>
     );
