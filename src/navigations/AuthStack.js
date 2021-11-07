@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Board, Community, Post, PostEditor } from '../screens';
+import { Login, Signup, Home, Community} from '../screens';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -36,23 +36,9 @@ const AuthStack = () => {
                 component={Home}
             />
             <Stack.Screen
-                name="Board"
-                component={Board}
-            />
-            
-            <Stack.Screen
                 name="Community"
                 component={Community}
             />
-            <Stack.Screen
-                name="Post"
-                component={Post}
-                
-            />
-            <Stack.Screen
-                name="PostEditor"
-                component={PostEditor}
-            />        
         </Stack.Navigator>
     );
 };
