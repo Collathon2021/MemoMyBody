@@ -5,10 +5,5 @@ include ':react-native-splash-screen'
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
-<<<<<<< HEAD
 include ':@react-native-firebase_database'
 project(':@react-native-firebase_database').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/database/android')
-=======
-include ':@react-native-firebase_app'
-project(':@react-native-firebase_app').projectDir = new File(rootProject.projectDir, './../node_modules/@react-native-firebase/app/android')
->>>>>>> eb1a0ab5247421fe410d7bf7f2e2b21d74d024ae

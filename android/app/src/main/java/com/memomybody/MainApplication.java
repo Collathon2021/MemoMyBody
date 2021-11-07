@@ -12,11 +12,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-<<<<<<< HEAD
 import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;
-=======
-import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
->>>>>>> eb1a0ab5247421fe410d7bf7f2e2b21d74d024ae
 import com.facebook.react.shell.MainReactPackage;
 
 import androidx.multidex.MultiDexApplication; // <-- FireBase
@@ -33,7 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
-          
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           // packages.add(new MainReactPackage());
@@ -47,10 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
         }
         
       };
-<<<<<<< HEAD
   
-=======
->>>>>>> eb1a0ab5247421fe410d7bf7f2e2b21d74d024ae
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
