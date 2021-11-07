@@ -1,5 +1,3 @@
-// Navigation 요소들
-
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
