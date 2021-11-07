@@ -108,11 +108,11 @@ const Community =({route, navigation})=>{
     }
 
     return(
-    <View  style={{backgroundColor:'#fc0', flex:1, }}>
+    <View  style={{backgroundColor:'#46476a', flex:1, }}>
       <SafeAreaView style={{flex:1, }}>
         
         <View style={{padding:15, }}> 
-          <Text style={{textAlign:'center', fontSize:18, }}>{CommunityType}</Text>
+          <Text style={{textAlign:'center', fontSize:18, color : '#eee' }}>{CommunityType}</Text>
         </View>
         <View style ={{backgroundColor: '#fff'}}>
             <FlatList data = {data} renderItem = {renderItem} 
@@ -127,6 +127,14 @@ const Community =({route, navigation})=>{
               <Text style={{color:'#ffff', }}>글쓰기</Text>
             </TouchableOpacity>
           </View>
+        </View>
+
+        <View style = {{backgroundColor: '#eee',
+        position:'absolute', left:20, bottom:20,zIndex:10,}}>
+            <Button onPress ={()=>{
+                navigation.pop();
+                
+            }} color = "#1c1c26" title = "뒤로가기" />
         </View>
       </SafeAreaView>
     </View>

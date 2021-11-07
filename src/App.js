@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import Navigation from './navigations/index';
 import { NavigationContainer } from '@react-navigation/native';
-
+import 'react-native-gesture-handler';
 
 import CameraScreen from '../test/CameraScreen';
 

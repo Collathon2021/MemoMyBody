@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
                 } else {
                     if(doc.data().userPW === pw) {
                         Alert.alert('Login Success',`환영합니다 ! ${doc.data().name}님`);
-                        navigation.navigate('Home');
+                        navigation.navigate('Menu');
                     } else {
                         Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);
                     }

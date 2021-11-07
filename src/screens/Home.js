@@ -1,13 +1,12 @@
 // 홈 메인 화면
 import { useNavigation } from '@react-navigation/core';
 import React, { Component, useEffect, useState} from 'react';
-import { Text, StyleSheet, View, TouchableOpacity, SectionList} from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, SectionList, ScrollView, Button} from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import { images } from '../utils/images';
-import { Image, Input, Button } from '../components';
+import { Image, Input,} from '../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
 import database, { firebase } from '@react-native-firebase/database';
 import { element } from 'prop-types';
 
@@ -16,8 +15,7 @@ import { element } from 'prop-types';
 const TopHome = ()=>{
     return(
         <SafeAreaView>
-            <View>
-                <Text style = {{fontSize: 20, textAlign: 'center'}}> Memo My body </Text>
+            <View style = {{top : 8}}>
                 <Image url={images.Loginlogo} imageStyle={{ borderRadius: 2 }}/>
             </View>
         </SafeAreaView>
@@ -29,12 +27,13 @@ const TopHome = ()=>{
 const MiddleHome = ()=>{
     return(
             <View style = {{justifyContent: 'center', flexDirection: 'row'
-        , marginLeft: 50, marginRight: 50, backgroundColor: '#eee', alignSelf: 'stretch'}}>
-                <View style = {{flex : 1}}>
-                    <Text style = {{fontSize : 20, backgroundColor: '#aaa', textAlign: 'center'}}> 출석 </Text>
-                    <Text style = {{fontSize : 20,backgroundColor: '#aaa', textAlign: 'center'}}> 업로드 </Text>
+        , marginLeft: 50, marginRight: 50, backgroundColor: '#8d91e0', alignSelf: 'stretch',
+        borderRadius: 15, bottom : 15}}>
+                <View style = {{flex : 1, padding : 20,}}>
+                    <Text style = {{fontSize : 20, backgroundColor: '#46476a', textAlign: 'center', color : '#eee',}}> 출석 </Text>
+                    <Text style = {{fontSize : 20,backgroundColor: '#46476a', textAlign: 'center', color : '#eee', top: 20}}> 업로드 </Text>
                 </View>
-                <View style = {{flex : 1}}>
+                <View style = {{flex : 1, top : 15}}>
                     <Image url={images.Loginlogo} imageStyle={{ borderRadius: 8 }}/>
                 </View>
             </View>
@@ -60,13 +59,13 @@ const DATA = [
     },
 ];
 const Item = ({communityType,title, navigation}) => (
-    <View style={{flex:1, backgroundColor:'#9c0', padding: 5 }} >
+    <View style={{flex:1, backgroundColor:'#edecfa', padding: 5 }} >
         <TouchableOpacity onPress={(item)=>{
             navigation.navigate("Community", {
             CommunityType: {communityType}.communityType})
             }
         }>
-            <Text style ={{textAlign : 'center', fontSize: 12}}>  {title} </Text>
+            <Text style ={{textAlign : 'center', fontSize: 12,}}>  {title} </Text>
         </TouchableOpacity>
     </View>
 );
@@ -74,28 +73,28 @@ const Item = ({communityType,title, navigation}) => (
 const BottomHome = ({data}) =>{
     const navigation = useNavigation();
     return(
-    <View style = {{backgroundColor: '#fff', padding: 5, padding :5,
-        marginLeft: 50, marginRight : 50, }}>
+    <View style = {{backgroundColor: '#8d91e0', padding: 5, padding :5,
+        marginLeft: 50, marginRight : 50, borderRadius: 15 }}>
         <SectionList style 
             sections={data}
             keyExtractor={(item, index) => index + item}
             renderItem={ ({item, index, section}) => {
+                if(index > 3) return null;
                 return(
-                    <Item style communityType={section.title} title ={item} navigation={navigation}/>
+                    <Item communityType={section.title} title ={item} navigation={navigation}/>
                 );
             }}
             renderSectionHeader={({section: {title}}) => <Text style={{fontSize: 18,
-                textAlign: 'center',}}> {title}</Text>
+                textAlign: 'center', color : '#1c1c26'}}> {title}</Text>
             }
         />
     </View>
     );
 }
 
-
 const Home = ({navigation}) => {
     const [data, setData] = useState(DATA);
-
+    
     useEffect(()=>{
         try{
             database()
@@ -148,10 +147,15 @@ const Home = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style = {{flex: 1}}>
+        <SafeAreaView style = {{flex: 1, backgroundColor: '#5359D1'}}>
             <TopHome /> 
             <MiddleHome />
             <BottomHome data = {data}/>
+            <View style = {{ position:'absolute', left:20, bottom:20,zIndex:10,}}>
+                <Button onPress ={()=>{
+                    navigation.pop();
+                }} color = "#1c1c26" title = "뒤로가기" />
+            </View>
         </SafeAreaView>
     );   
 };
