@@ -129,7 +129,6 @@ android {
         applicationId "com.collathon.MemoMyBody"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        missingDimensionStrategy 'react-native-camera', 'general'
         versionCode 1
         versionName "1.0"
         multiDexEnabled true // <-- FireBase
@@ -181,7 +180,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ":@react-native-firebase_database")
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
