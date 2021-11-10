@@ -10,7 +10,7 @@ const Navigation = () => {
     return(
         <NavigationContainer>
             <AuthStack />
-            {/* AuthStack 컴포넌트 호출 */}
+            
         </NavigationContainer>
     );
 };

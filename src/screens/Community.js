@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View, TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Community =({route, navigation})=>{
     const {CommunityType} = route.params

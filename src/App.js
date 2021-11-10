@@ -15,10 +15,8 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <StatusBar barStyle="dark-content" /> 
-            {/* 휴대폰 최상단 설정 */} 
+            <StatusBar barStyle="dark-content" />            
             <Navigation />
-            {/* Navigation 컴포넌트 호출 */}
         </ThemeProvider>
     );
 };
