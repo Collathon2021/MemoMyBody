@@ -76,7 +76,6 @@ const Community =({route, navigation})=>{
         }
     }, [])
     
-
     if(writeMode){
         return(
             <SafeAreaView style={{flex:1, backgroundColor:'#9c0', }}>
