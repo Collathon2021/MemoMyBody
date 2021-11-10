@@ -9,7 +9,6 @@ import { _handleSignupButtonPress } from './LoginFB';
 import { Alert } from 'react-native';
 import db from '../../../test/db';
 
-
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const Container = styled.View`
