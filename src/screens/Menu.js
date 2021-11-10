@@ -1,36 +1,39 @@
 import { StatusBar } from 'react-native';
 import React, { useRef, useState } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, 
-    Text, TouchableOpacity, View, Modal, Pressable,
-ScrollView, } from 'react-native';
-import profile from '../assets/profile.png';
-// Tab ICons...
+        Text, TouchableOpacity, View, Modal, Pressable,
+        ScrollView, } from 'react-native';
+import formenu from '../assets/ww.png';
 import home from '../assets/home.png';
 import search from '../assets/search.png';
 import notifications from '../assets/bell.png';
 import settings from '../assets/settings.png';
 import logout from '../assets/logout.png';
-// Menu
 import menu from '../assets/menu.png';
 import close from '../assets/close.png';
-
-// Photo
-import photo from '../assets/photo.jpeg';
-import { Button } from '../components';
-
 import { createStackNavigator } from '@react-navigation/stack';
 import {Home, Community}from '../screens';
 
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#808080',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+});
+
 const Stack = createStackNavigator();
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 
 const Menu1 = ({navigation}) => {
   const [currentTab, setCurrentTab] = useState("홈");
-  // To get the curretn Status of menu ...
-  const [showMenu, setShowMenu] = useState(false);
-  // Animated Properties...
-
+  const [showMenu, setShowMenu] = useState(false); 
   const offsetValue = useRef(new Animated.Value(0)).current;
-  // Scale Intially must be One...
   const scaleValue = useRef(new Animated.Value(1)).current;
   const closeButtonOffset = useRef(new Animated.Value(0)).current;
   const [modalVisible, setModalVisible] = useState(true);
@@ -38,11 +41,11 @@ const Menu1 = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{padding: 15, left : 25 }}>
-        <Image source={profile} style={{
-          width: 60,
-          height: 60,
-          borderRadius: 10,
-          marginTop: 8
+        <Image source={formenu} style={{
+            width: 80,
+            height: 80,
+            borderRadius: 0,
+            marginTop: 7
         }}></Image>
 
         <Text style={{
@@ -51,55 +54,46 @@ const Menu1 = ({navigation}) => {
           color: 'white',
           marginTop: 20
         }}>Jenna Ezarik</Text>
-
-        <TouchableOpacity>
-          <Text style={{
-            marginTop: 6,
-            color: 'white'
-          }}>View Profile</Text>
+        
+        <TouchableOpacity>  
+          <Text style={{fontSize: 13,
+            fontWeight: 'bold',
+            color: 'white',
+            marginTop: 10
+            }}>회원정보 수정</Text>
         </TouchableOpacity>
+
         <ScrollView>
-            <View style={{ flexGrow: 1, marginTop: 50 }}>
-                {
-                // Tab Bar Buttons....
-                }
+            <View style={{ flexGrow: 1, marginTop: 50 }}>    
                 {TabButton(currentTab, setCurrentTab, "홈", home, navigation)}
                 {TabButton(currentTab, setCurrentTab, "자유게시판", search, navigation)}
                 {TabButton(currentTab, setCurrentTab, "루틴 및 자세게시판", search, navigation)}
                 {TabButton(currentTab, setCurrentTab, "식단정보게시판", search, navigation)}
-                {TabButton(currentTab, setCurrentTab, "Best게시판", search, navigation)}
-                {TabButton(currentTab, setCurrentTab, "알림", notifications, navigation)}
-                {TabButton(currentTab, setCurrentTab, "설정", settings, navigation)}
-            </View>
-            <View>
-            {TabButton(currentTab, setCurrentTab, "로그아웃", logout, navigation)}
+                {TabButton(currentTab, setCurrentTab, "Best게시판", search, navigation)}  
+                {TabButton(currentTab, setCurrentTab, "로그아웃", logout, navigation)}
             </View>
         </ScrollView>
-
-        
-
       </View>
         {
             // Over lay View...
         }
 
         <Animated.View style= {{
-    
-        backgroundColor: 'white',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        paddingHorizontal: 15,
-        paddingVertical: 20,
-        borderRadius: showMenu ? 15 : 0,
-        // Transforming View...
-        transform: [
-            { scale: scaleValue },
-            { translateX: offsetValue }
-        ]
-        }} >
+          backgroundColor: 'white',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          paddingHorizontal: 15,
+          paddingVertical: 20,
+          borderRadius: showMenu ? 15 : 0,
+          // Transforming View...
+          transform: [
+              { scale: scaleValue },
+              { translateX: offsetValue }
+          ]
+        }}>
             {
             // Menu Button...
             }
@@ -169,7 +163,8 @@ const Menu1 = ({navigation}) => {
   );
 }
 
-// For multiple Buttons...
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 const TabButton = (currentTab, setCurrentTab, title, image, navigation) => {
   return (
     <TouchableOpacity onPress={() => {
@@ -220,14 +215,8 @@ const TabButton = (currentTab, setCurrentTab, title, image, navigation) => {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#5359D1',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-});
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 
 const Panel = ({navigation})=>{
     return(
@@ -254,10 +243,14 @@ const Panel = ({navigation})=>{
     );
 };
 
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 const Menu = ({navigation})=>{
     return(
         <Panel navigation={navigation}/>
     );
 };
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 export default Menu;

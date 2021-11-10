@@ -3,6 +3,8 @@ import {SafeAreaView, StyleSheet, Text, View, TextInput, Button, StatusBar, Touc
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
 
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 const Community =({route, navigation})=>{
     const {CommunityType} = route.params
     const [postNumber, setPostNumber] = useState(0);
@@ -139,5 +141,8 @@ const Community =({route, navigation})=>{
     </View>
     );
 }
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
+
 
 export default Community;

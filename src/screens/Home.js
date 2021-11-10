@@ -2,48 +2,13 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { Component, useEffect, useState} from 'react';
 import { Text, StyleSheet, View, TouchableOpacity, SectionList, ScrollView, Button} from 'react-native';
-import { ThemeProvider } from 'styled-components/native';
-import { theme } from './theme';
 import { images } from '../utils/images';
 import { Image, Input,} from '../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import database, { firebase } from '@react-native-firebase/database';
-import { element } from 'prop-types';
 
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
-// 상단
-const TopHome = ()=>{
-    return(
-        <SafeAreaView>
-            <View style = {{top : 8}}>
-                <Image url={images.Loginlogo} imageStyle={{ borderRadius: 2 }}/>
-            </View>
-        </SafeAreaView>
-    )
-}
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━// 상단
 
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
-// 중단
-const MiddleHome = ()=>{
-    return(
-            <View style = {{justifyContent: 'center', flexDirection: 'row'
-        , marginLeft: 50, marginRight: 50, backgroundColor: '#8d91e0', alignSelf: 'stretch',
-        borderRadius: 15, bottom : 15}}>
-                <View style = {{flex : 1, padding : 20,}}>
-                    <Text style = {{fontSize : 20, backgroundColor: '#46476a', textAlign: 'center', color : '#eee',}}> 출석 </Text>
-                    <Text style = {{fontSize : 20,backgroundColor: '#46476a', textAlign: 'center', color : '#eee', top: 20}}> 업로드 </Text>
-                </View>
-                <View style = {{flex : 1, top : 15}}>
-                    <Image url={images.Loginlogo} imageStyle={{ borderRadius: 8 }}/>
-                </View>
-            </View>
-    )
-}
-
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
-// 하단
-// data에 게시판 글 제목들을 미리 표시하며 클릭하면 이제 그 게시물로 이동
-// 아래 data는 예시
 const DATA = [
     {
         title: 'Best게시판', data : ['1. 하루만에 키가 2미터', '2. 와 오진다']
@@ -58,6 +23,7 @@ const DATA = [
         title: '식단정보게시판', data : ['Board','21312']
     },
 ];
+
 const Item = ({communityType,title, navigation}) => (
     <View style={{flex:1, backgroundColor:'#edecfa', padding: 5 }} >
         <TouchableOpacity onPress={(item)=>{
@@ -95,7 +61,7 @@ const BottomHome = ({data}) =>{
 const Home = ({navigation}) => {
     const [data, setData] = useState(DATA);
     
-    useEffect(()=>{
+    useEffect(() => {
         try{
             database()
             .ref('/')
@@ -121,7 +87,6 @@ const Home = ({navigation}) => {
                     });
                 });
 
-                    // console.log(tmp);
                 var idx = 0;
                 DATA.forEach((data)=>{
                     if(tmp.find(element => element.title == data.title) == undefined){
@@ -147,9 +112,7 @@ const Home = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style = {{flex: 1, backgroundColor: '#5359D1'}}>
-            <TopHome /> 
-            <MiddleHome />
+        <SafeAreaView style = {{flex: 1, justifyContent: 'center', alignContent: 'center', backgroundColor: '#fdfdeb'}} >
             <BottomHome data = {data}/>
             <View style = {{ position:'absolute', left:20, bottom:20,zIndex:10,}}>
                 <Button onPress ={()=>{

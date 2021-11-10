@@ -86,9 +86,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        onPress={() => _handleLoginButtonPress(email,password)}
-                        disabled={disabled}
-                        //onPress = {() => navigation.navigate('Home')} 
+                        //onPress={() => _handleLoginButtonPress(email,password)}
+                        //disabled={disabled}
+                        onPress = {() => navigation.navigate('Menu')} 
                     />
                     <Button
                         title="Sign up"
