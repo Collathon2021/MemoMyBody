@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, 
+        TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -13,7 +14,7 @@ const Community =({route, navigation})=>{
     const [data, setData] = useState("");
     const [writeMode, setWriteMode] = useState(false);
 
-    const saveMemo = ()=>{
+    const saveMemo = () => {
         var key = Math.random().toString().replace(".", "");
         var memo = text;
         try{
@@ -23,7 +24,7 @@ const Community =({route, navigation})=>{
             .set({
                 memo: memo,
                 regdate: new Date().toString(),
-            }).then(()=> {
+            }).then(() => {
                 if(text1.current)
                     text1.current.clear();
             })
@@ -33,7 +34,7 @@ const Community =({route, navigation})=>{
         }
     }
 
-    const delMemo = key =>{
+    const delMemo = ( key ) => {
         try{
             firebase
             .database()
@@ -45,21 +46,29 @@ const Community =({route, navigation})=>{
         }
     }
 
-    const renderItem = ({item}) =>{
+    const renderItem = ({ item }) => { 
         return(
             <SafeAreaView>
-            <View style={{padding:15, borderBottomColor:'#aaa', borderBottomWidth:1,  flexDirection:'row', }}>
-                <Text style={{flex:1, }}>
-                    {item.memo} 
-                </Text>
-                <Button title="삭제" onPress = {()=> delMemo(item.key)}/>
-            </View>
+                <View style={{
+                    padding:15, 
+                    borderBottomColor:'#aaa',
+                    borderBottomWidth: 1,
+                    flexDirection:'row',
+                }}>
+                    <Text style={{flex:1, }}>
+                        ▶  {item.memo} 
+                    </Text>
+                    {/*<Button title="삭제" onPress = {() => delMemo(item.key)}/>*/}
+                </View>
             </SafeAreaView>
         )
     }
 
-    useEffect(()=>{
-        var changeDataRef = firebase.database().ref({CommunityType}.CommunityType.toString()).orderByChild("regdate");
+    useEffect(() => {
+        var changeDataRef = firebase
+                            .database()
+                            .ref({CommunityType}.CommunityType.toString())
+                            .orderByChild("regdate");
         try{
             changeDataRef.on("value", (snapshot)=>{
                 const tmp = [];
@@ -78,21 +87,20 @@ const Community =({route, navigation})=>{
         }
     }, [])
     
-    if(writeMode){
+    if( writeMode ) { //글쓰기
         return(
             <SafeAreaView style={{flex:1, backgroundColor:'#9c0', }}>
-                <View  style={{flex:1,   }}>        
+                <View style={{flex:1, }}>        
                     <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <TouchableOpacity style={{padding:15, }} onPress={()=>setWriteMode(false)}>
-                        <Text style={{fontSize:18, }}>취소</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{padding:15, }}  onPress={()=>{
-                        saveMemo();
-                        setWriteMode(false);
-                    }} >
-                        <Text style={{fontSize:18, }}>저장</Text>
-                    </TouchableOpacity>
-
+                        <TouchableOpacity style={{padding:15, }} onPress={()=>setWriteMode(false)}>
+                            <Text style={{fontSize:18, }}>취소</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{padding:15, }}  onPress={()=>{
+                            saveMemo();
+                            setWriteMode(false);
+                        }} >
+                            <Text style={{fontSize:18, }}>저장</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{flex:1, backgroundColor:'#fff', }}>
                         <TextInput style={{backgroundColor:'#eee', padding:5, flex:1, }}
@@ -104,41 +112,50 @@ const Community =({route, navigation})=>{
 
                     <StatusBar style="auto" />
                 </View>
-                </SafeAreaView>
+            </SafeAreaView>
         );
     }
 
     return(
-    <View  style={{backgroundColor:'#46476a', flex:1, }}>
-      <SafeAreaView style={{flex:1, }}>
-        
-        <View style={{padding:15, }}> 
-          <Text style={{textAlign:'center', fontSize:18, color : '#eee' }}>{CommunityType}</Text>
-        </View>
-        <View style ={{backgroundColor: '#fff'}}>
-            <FlatList data = {data} renderItem = {renderItem} 
-            style ={{padding: 15,} } />
-        </View>
-
-        <View style={{position:'absolute', right:20, bottom:20,zIndex:10,  }}>
-          <View style={{          width:50, height:50, backgroundColor:'tomato', borderRadius:25,
-                alignItems:'center', justifyContent:'center', 
-            }}>          
-            <TouchableOpacity onPress={()=>setWriteMode(true)}>       
-              <Text style={{color:'#ffff', }}>글쓰기</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style = {{backgroundColor: '#eee',
-        position:'absolute', left:20, bottom:20,zIndex:10,}}>
-            <Button onPress ={()=>{
-                navigation.pop();
+        <View style={{backgroundColor:'#ffffe0', flex:1}}>
+            <SafeAreaView style={{flex:1, }}>
+                <View style={{ padding:15, marginTop: 10}}> 
+                    <Text style = {{
+                        textAlign:'center', 
+                        fontSize: 18,
+                        fontWeight: 'bold', 
+                        color : '#1c1c26' 
+                    }}>{CommunityType}</Text>
+                </View> 
                 
-            }} color = "#1c1c26" title = "뒤로가기" />
+                <View style = {{ 
+                    backgroundColor: '#dcdcdc', 
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    borderRadius: 15,                    
+                }}>
+                    <FlatList data = {data} renderItem = {renderItem} 
+                              style ={{padding: 10,} }
+                    />
+                </View>
+
+                <View style={{position:'absolute', right:20, bottom:20, zIndex:10,  }}>
+                    <View style={{
+                            width:50, 
+                            height:50, 
+                            backgroundColor:'tomato', 
+                            borderRadius:25,
+                            alignItems:'center', 
+                            justifyContent:'center', 
+                    }}>          
+                        <TouchableOpacity onPress={() => setWriteMode(true)}>       
+                        <Text style={{color:'#ffff', }}> 글쓰기 </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </SafeAreaView>
         </View>
-      </SafeAreaView>
-    </View>
     );
 }
 

@@ -116,8 +116,6 @@ const Home = () => {
             marginTop: 7
              }}></Image>
             <BottomHome data = {data}/>
-            <View style = {{ position:'absolute', left:20, bottom:20,zIndex:10,}}>
-            </View>
         </SafeAreaView>
     );   
 };
