@@ -1,5 +1,5 @@
 import { StatusBar } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, 
         Text, TouchableOpacity, View, Modal, Pressable,
         ScrollView, } from 'react-native';
@@ -13,6 +13,7 @@ import menu from '../assets/menu.png';
 import close from '../assets/close.png';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Home, Community}from '../screens';
+import { UserContext } from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -30,13 +31,14 @@ const Stack = createStackNavigator();
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 
-const Menu1 = ({navigation}) => {
+export const Menu1 = ({navigation}) => {
   const [currentTab, setCurrentTab] = useState("홈");
   const [showMenu, setShowMenu] = useState(false); 
   const offsetValue = useRef(new Animated.Value(0)).current;
   const scaleValue = useRef(new Animated.Value(1)).current;
   const closeButtonOffset = useRef(new Animated.Value(0)).current;
   const [modalVisible, setModalVisible] = useState(true);
+  const { user: {name} } = useContext(UserContext);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,13 +49,14 @@ const Menu1 = ({navigation}) => {
             borderRadius: 0,
             marginTop: 7
         }}></Image>
-
+        
+        
         <Text style={{
           fontSize: 20,
           fontWeight: 'bold',
           color: 'white',
           marginTop: 20
-        }}>Jenna Ezarik</Text>
+        }}>{name}</Text>
         
         <TouchableOpacity>  
           <Text style={{fontSize: 13,
@@ -254,3 +257,4 @@ const Menu = ({navigation})=>{
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 export default Menu;
+

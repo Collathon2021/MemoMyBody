@@ -1,6 +1,6 @@
 // 로그인 화면
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
@@ -9,6 +9,9 @@ import { Image, Input, Button } from '../../components';
 import { images } from '../../utils/images';
 //import { _handleLoginButtonPress } from './LoginFB';
 import db from '../../../test/db';
+import { UserContext } from '../../contexts/UserContext';
+import { $CombinedState } from 'redux';
+
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -29,7 +32,8 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
     const passwordRef = useRef();
-    const insets = useSafeAreaInsets();       
+    const insets = useSafeAreaInsets();  
+    const { user, setUser } = useContext(UserContext);    
 
     useEffect(() => {
         setDisabled(!(email && password ));
@@ -41,12 +45,16 @@ const Login = ({ navigation }) => {
             .doc(id)
             .get()
             .then(doc => {
-                if(!doc.data()) { 
-                // id가 없음
-                Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);                   
+                if(!doc.data()) { // id가 없음
+                    Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);                   
                 } else {
                     if(doc.data().userPW === pw) {
-                        Alert.alert('Login Success',`환영합니다 ! ${doc.data().name}님`);
+                        const n = doc.data().name;
+                        Alert.alert('Login Success',`환영합니다 ! ${n}님`);
+                        setUser({
+                            name: n ,
+                            id
+                        });
                         navigation.navigate('Menu');
                     } else {
                         Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);
@@ -86,9 +94,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        //onPress={() => _handleLoginButtonPress(email,password)}
-                        //disabled={disabled}
-                        onPress = {() => navigation.navigate('Menu')} 
+                        onPress={() => _handleLoginButtonPress(email,password)}
+                        disabled={disabled}
+                        //idonPress = {() => navigation.navigate('Menu')} 
                     />
                     <Button
                         title="Sign up"

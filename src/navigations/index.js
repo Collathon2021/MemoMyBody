@@ -10,7 +10,6 @@ const Navigation = () => {
     return(
         <NavigationContainer>
             <AuthStack />
-            
         </NavigationContainer>
     );
 };
