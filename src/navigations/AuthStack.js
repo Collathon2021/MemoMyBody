@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Menu, Community} from '../screens';
+import { Login, Signup, Home, Community, Tabmenu} from '../screens';
 import UserContextProvider from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
@@ -25,28 +25,25 @@ const AuthStack = () => {
             >
                 <Stack.Screen 
                     name="Login" 
-                    component={Login}
-                    //options={{ headerShown: false }}  회원가입 위에 Login 타이틀 없애기            
+                    component={Login}        
                 />
                 <Stack.Screen 
                     name="Signup" 
                     component={Signup}
                     options={{ headerBackTitleVisible: false }}
-                />         
+                />
                 <Stack.Screen
                     name="Home"
                     component={Home}
                 />
-                
                 <Stack.Screen
                     name="Community"
                     component={Community}
                 />
                 <Stack.Screen
-                    name="Menu"
-                    component={Menu}
+                    name="Tabmenu"
+                    component={Tabmenu}
                 />
-                
             </Stack.Navigator>
       </UserContextProvider>
     );

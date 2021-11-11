@@ -26,7 +26,7 @@ const DATA = [
 
 const Item = ({communityType,title, navigation}) => (
     <View style={{flex:1, backgroundColor:'#edecfa', padding: 5 }} >
-        <TouchableOpacity onPress={(item)=>{
+        <TouchableOpacity onPress={ ( item ) => {
             navigation.navigate("Community", {
             CommunityType: {communityType}.communityType})
             }
@@ -36,22 +36,25 @@ const Item = ({communityType,title, navigation}) => (
     </View>
 );
 
-const BottomHome = ({data}) =>{
+const BottomHome = ({data}) => {
     const navigation = useNavigation();
     return(
-    <View style = {{backgroundColor: '#8d91e0', padding: 5, padding :5,
-        marginLeft: 50, marginRight : 50, borderRadius: 15 }}>
+    <View style = {{
+        backgroundColor: '#8fbc8f', padding:10, padding : 5,
+        marginLeft:20, marginRight : 20, borderRadius: 10 
+    }}>
         <SectionList style 
             sections={data}
             keyExtractor={(item, index) => index + item}
-            renderItem={ ({item, index, section}) => {
+            renderItem={({item, index, section}) => {
                 if(index > 3) return null;
                 return(
                     <Item communityType={section.title} title ={item} navigation={navigation}/>
                 );
             }}
-            renderSectionHeader={({section: {title}}) => <Text style={{fontSize: 18,
-                textAlign: 'center', color : '#1c1c26'}}> {title}</Text>
+            renderSectionHeader={({section: {title}}) => 
+                <Text style={{fontSize: 20,
+                    textAlign: 'center', color : '#1c1c26'}}> {title}</Text>
             }
         />
     </View>

@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
                             name: n ,
                             id
                         });
-                        navigation.navigate('Menu');
+                        navigation.navigate('Tabmenu');
                     } else {
                         Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);
                     }
@@ -94,9 +94,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        onPress={() => _handleLoginButtonPress(email,password)}
-                        disabled={disabled}
-                        //idonPress = {() => navigation.navigate('Menu')} 
+                        //onPress={() => _handleLoginButtonPress(email,password)}
+                        //disabled={disabled}
+                        onPress = {() => navigation.navigate('Tabmenu')} 
                     />
                     <Button
                         title="Sign up"
