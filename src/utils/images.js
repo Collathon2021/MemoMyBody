@@ -1,7 +1,6 @@
-// Firebase에서 이미지를 찾아 옴
 
 const Loginlogo =
-'https://firebasestorage.googleapis.com/v0/b/collathon.appspot.com/o/logo.png?alt=media&token=b19b3266-2b0f-434b-8bf7-79cdd09aff96';
+'https://firebasestorage.googleapis.com/v0/b/collathon.appspot.com/o/3weight.png?alt=media&token=26b68b74-e742-4a3e-a61a-976baa9b05bf'
 
 const Signuplogo =
 'https://firebasestorage.googleapis.com/v0/b/collathon.appspot.com/o/SignupImage.png?alt=media&token=435774c5-29b0-4d96-8789-06f173e4def7';

@@ -1,16 +1,16 @@
 // 로그인 화면
 
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, Alert, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Image, Input, Button } from '../../components';
-import { images } from '../../utils/images';
-//import { _handleLoginButtonPress } from './LoginFB';
+import { Input, Button } from '../../components';
+//import { images } from '../../utils/images';
 import db from '../../../test/db';
 import { UserContext } from '../../contexts/UserContext';
 import { $CombinedState } from 'redux';
+import forlogin from '../../assets/3weight.png';
 
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
                             name: n ,
                             id
                         });
-                        navigation.navigate('Tabmenu');
+                        navigation.navigate('menu');
                     } else {
                         Alert.alert('Login Error',`ID 또는 PW를 다시 확인하세요.`);
                     }
@@ -73,7 +73,14 @@ const Login = ({ navigation }) => {
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <Container insets={insets}>
-                    <Image url={images.Loginlogo} imageStyle={{ borderRadius: 8 }}/>
+                    {/*<Image url={images.Loginlogo} imageStyle={{ borderRadius: 0 }}/>*/}
+                    <Image source={forlogin} style={{
+                        width: 200,
+                        height: 90,
+                        borderRadius: 0,
+                        marginTop: 1,
+                        marginBottom: 25
+                     }}></Image>
                     <Input
                         label="Id"
                         value={email}
@@ -96,7 +103,7 @@ const Login = ({ navigation }) => {
                         title="Login" 
                         //onPress={() => _handleLoginButtonPress(email,password)}
                         //disabled={disabled}
-                        onPress = {() => navigation.navigate('Tabmenu')} 
+                        onPress = {() => navigation.navigate('menu')} 
                     />
                     <Button
                         title="Sign up"

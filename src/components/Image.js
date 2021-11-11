@@ -13,8 +13,8 @@ const Container = styled.View`
 
 const StyledImage = styled.Image`
     background-color: ${({ theme }) => theme.imageBackground};
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: ${({ rounded }) => (rounded ? 50 : 0)}px;
 `;
 

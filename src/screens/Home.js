@@ -1,32 +1,23 @@
-// 홈 메인 화면
-import { useNavigation } from '@react-navigation/core';
-import React, { Component, useEffect, useState} from 'react';
-import { Text, StyleSheet, View, TouchableOpacity, SectionList, ScrollView, Button} from 'react-native';
-import { images } from '../utils/images';
-import { Image, Input,} from '../components';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import database, { firebase } from '@react-native-firebase/database';
 
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━// 상단
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState} from 'react';
+import { Text, View, TouchableOpacity, SectionList, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import database from '@react-native-firebase/database';
+import formenu from '../assets/ww.png';
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const DATA = [
-    {
-        title: 'Best게시판', data : ['1. 하루만에 키가 2미터', '2. 와 오진다']
-    },
-    {
-        title: '자유게시판', data : ['1. 기타등등', '2. ????']
-    },
-    {
-        title: '루틴 및 자세게시판', data: ['1. ㅇㅇㅇㅇ', '2. 글좀써줘']
-    },
-    {
-        title: '식단정보게시판', data : ['Board','21312']
-    },
+    { title: 'Best게시판', data : ['1. 하루만에 키가 2미터', '2. 와 오진다'] },
+    { title: '자유게시판', data : ['1. 기타등등', '2. ????'] },
+    { title: '루틴 및 자세게시판', data: ['1. ㅇㅇㅇㅇ', '2. 글좀써줘'] },
+    { title: '식단정보게시판', data : ['Board','21312'] },
 ];
 
-const Item = ({communityType,title, navigation}) => (
-    <View style={{flex:1, backgroundColor:'#edecfa', padding: 5 }} >
-        <TouchableOpacity onPress={ ( item ) => {
+const Item = ({ communityType, title, navigation}) => (
+    <View style={{flex:1, backgroundColor:'#edecfa', padding: 5 }}>
+        <TouchableOpacity onPress={() => {
             navigation.navigate("Community", {
             CommunityType: {communityType}.communityType})
             }
@@ -36,7 +27,7 @@ const Item = ({communityType,title, navigation}) => (
     </View>
 );
 
-const BottomHome = ({data}) => {
+const BottomHome = ({ data }) => {
     const navigation = useNavigation();
     return(
     <View style = {{
@@ -61,7 +52,7 @@ const BottomHome = ({data}) => {
     );
 }
 
-const Home = ({navigation}) => {
+const Home = () => {
     const [data, setData] = useState(DATA);
     
     useEffect(() => {
@@ -70,9 +61,9 @@ const Home = ({navigation}) => {
             .ref('/')
             .on('value', snapshot => {
                 const tmp = [];
-                snapshot.forEach((child)=>{
+                snapshot.forEach(( child ) => {
                     const childData = [];
-                    child.forEach((data)=>{
+                    child.forEach(( data ) => {
                         childData.unshift({
                             key : data.key,
                             memo: data.val(),
@@ -80,25 +71,23 @@ const Home = ({navigation}) => {
                         })
                     })
                     const memo = [];
-                    childData.forEach((m)=>{
+                    childData.forEach(( m ) => {
                         memo.push(m.memo.memo);
                     })
-
                     tmp.unshift({
                         title : child.key,
                         data : memo,
                     });
                 });
-
                 var idx = 0;
-                DATA.forEach((data)=>{
+                DATA.forEach(( data ) => {
                     if(tmp.find(element => element.title == data.title) == undefined){
                         tmp.push({title: data.title, data: data.data});
                     }
                     idx++;
                 })
                 
-                tmp.forEach((data)=>{
+                tmp.forEach(( data ) => {
                     var idx;
                     if((idx = tmp.find(element=> element.title == "Best게시판"))!= undefined){
                         
@@ -106,21 +95,28 @@ const Home = ({navigation}) => {
                 })
                 setData(tmp);
             });
-        }
-        catch(error){
+        } catch(error){
             alert(error.toString());
         }
-
     }, [])
 
-
     return (
-        <SafeAreaView style = {{flex: 1, justifyContent: 'center', alignContent: 'center', backgroundColor: '#fdfdeb'}} >
+        <SafeAreaView style = {{
+            flex: 1, 
+            justifyContent: 'center', 
+            alignContent: 'center', 
+            backgroundColor: '#ffffe0'
+            // lightyello #ffffe0  , white #ffffff
+        }}>
+            <Image source={formenu} style={{
+            width: 80, 
+            height: 80, 
+            marginLeft: 20,
+            borderRadius: 0,
+            marginTop: 7
+             }}></Image>
             <BottomHome data = {data}/>
             <View style = {{ position:'absolute', left:20, bottom:20,zIndex:10,}}>
-                <Button onPress ={()=>{
-                    navigation.pop();
-                }} color = "#1c1c26" title = "뒤로가기" />
             </View>
         </SafeAreaView>
     );   
