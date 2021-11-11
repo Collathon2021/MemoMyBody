@@ -1,14 +1,10 @@
 import React, { useRef, useState, useContext } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, 
         Text, TouchableOpacity, View, ScrollView, } from 'react-native';
-import formenu from '../assets/ww.png';
+import formenu from '../assets/menu2.png';
 import home from '../assets/home.png';
 import search from '../assets/search.png';
 import logout from '../assets/logout.png';
-import menu from '../assets/menu.png';
-import close from '../assets/close.png';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Home, Community}from '../screens';
 import { UserContext } from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
@@ -23,7 +19,6 @@ const styles = StyleSheet.create({
 });
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
-
 
 const TabButton = (currentTab, setCurrentTab, title, image, navigation) => {
   return (
@@ -76,7 +71,7 @@ const TabButton = (currentTab, setCurrentTab, title, image, navigation) => {
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
-const Tabmenu = ({ navigation }) => {
+const menu = ({ navigation }) => {
   const [currentTab, setCurrentTab] = useState("홈");
   const { user: {name} } = useContext(UserContext);
 
@@ -122,5 +117,5 @@ const Tabmenu = ({ navigation }) => {
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
-export default Tabmenu;
+export default menu;
 
