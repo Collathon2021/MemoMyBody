@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Community, menu} from '../screens';
+import { Login, Signup, Home, Community, menu, LoginFix} from '../screens';
 import UserContextProvider from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
@@ -44,6 +44,10 @@ const AuthStack = () => {
                     name="menu"
                     component={menu}
                     options={{headerLeft: () => null}}
+                />
+                <Stack.Screen
+                    name="LoginFix"
+                    component={LoginFix}
                 />
             </Stack.Navigator>
       </UserContextProvider>

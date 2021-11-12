@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext } from 'react';
 import {SafeAreaView, StyleSheet, Text, View, 
         TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
+import { UserContext } from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -13,6 +14,7 @@ const Community =({route, navigation})=>{
     const text1 =useRef("");
     const [data, setData] = useState("");
     const [writeMode, setWriteMode] = useState(false);
+    const { user: {name} } = useContext(UserContext);
 
     const saveMemo = () => {
         var key = Math.random().toString().replace(".", "");
@@ -20,13 +22,14 @@ const Community =({route, navigation})=>{
         try{
             firebase
             .database()
-            .ref({CommunityType}.CommunityType.toString() +"/" + key)
+            .ref({CommunityType}.CommunityType.toString() +"/" + name)
             .set({
                 memo: memo,
                 regdate: new Date().toString(),
             }).then(() => {
                 if(text1.current)
                     text1.current.clear();
+                console.log({name});
             })
         }
         catch(error){
