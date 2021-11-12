@@ -11,25 +11,32 @@ const Community =({route, navigation})=>{
     const {CommunityType} = route.params
     const [postNumber, setPostNumber] = useState(0);
     const [text, setText] = useState("");
-    const text1 = useRef("");
+    const [title, setTitle] = useState("");
+    const text1 = useRef(""); // 글쓰기 제목
+    const text2 = useRef(""); // 글쓰기 내용
     const [data, setData] = useState("");
     const [writeMode, setWriteMode] = useState(false);
     const { user: {id} } = useContext(UserContext);
 
-    const saveMemo = () => {
+    // 게시물 등록
+    const saveMemo = () => { 
         var key = Math.random().toString().replace(".", "");
         var memo = text;
+        var temo = title;
         try{
             firebase
             .database()
             .ref({CommunityType}.CommunityType.toString() +"/" + key)
             .set({
+                Title: temo,
                 memo: memo,
                 regdate: new Date().toString(),
-                UserID: {id},
+                UserID: id,
             }).then(() => {
                 if(text1.current)
                     text1.current.clear();
+                if(text2.current)
+                    text2.current.clear();
             })
         }
         catch(error){
@@ -37,6 +44,7 @@ const Community =({route, navigation})=>{
         }
     }
 
+    // 게시물 삭제
     const delMemo = ( key ) => {
         try{
             firebase
@@ -86,28 +94,51 @@ const Community =({route, navigation})=>{
             });
         }
         catch(error){
-            alert("not valid ");
+            alert("not valid");
         }
     }, [])
     
     if( writeMode ) { //글쓰기
         return(
-            <SafeAreaView style={{flex:1, backgroundColor:'#9c0', }}>
+            <SafeAreaView style={{flex:1, backgroundColor:'#ffffe0', }}>
                 <View style={{flex:1,}}>        
                     <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                         <TouchableOpacity style={{padding:15, }} onPress={() => setWriteMode(false) }>
                             <Text style={{fontSize:18, fontWeight:'bold'}}> 취소 </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{padding:15, }} onPress={() => {saveMemo(); setWriteMode(false); }}>
-                            <Text style={{fontSize:18, fontWeight:'bold'}}> 저장 </Text>
+                            <Text style={{fontSize:18, fontWeight:'bold'}}> 등록 </Text>
                         </TouchableOpacity>
                     </View>
-
-                    <View style={{flex:1, backgroundColor:'#fff', }}>
-                        <TextInput style={{backgroundColor:'#eee', padding:5, flex:1, }}
+                    <View style={{flex:1, backgroundColor:'#fff,'}}>
+                        <TextInput style={{
+                            backgroundColor:'#dcdcdc', 
+                            padding:10, 
+                            flex:1, 
+                            fontSize: 15, 
+                            borderRadius:5,
+                            marginLeft:10,
+                            marginRight:10,
+                        }}
+                            ref ={text2}
+                            onChangeText={title => setTitle(title)}
+                            multiline
+                            placeholder="제목을 입력해주세요" 
+                        /> 
+                    </View>
+                    <View style={{flex:5, backgroundColor:'#ffffe0', }}>
+                        <TextInput style={{
+                            backgroundColor:'#eee', 
+                            padding:10, 
+                            flex:1, 
+                            fontSize: 15,
+                            marginLeft:10,
+                            marginRight:10, 
+                            marginBottom:10,
+                            borderRadius:5,
+                        }}
                             ref ={text1}
-                            
-                            onChangeText={text=> setText(text)}
+                            onChangeText={text => setText(text)}
                             multiline
                             placeholder="내용을 입력해주세요" 
                         /> 
