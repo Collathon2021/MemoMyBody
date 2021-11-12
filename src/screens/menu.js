@@ -92,7 +92,11 @@ const menu = ({ navigation }) => {
           marginTop: 20
         }}>{name}</Text>
         
-        <TouchableOpacity>  
+        <TouchableOpacity
+          onPress = {()=>{
+            navigation.navigate("LoginFix");
+          }}
+        >  
           <Text style={{fontSize: 13,
             fontWeight: 'bold',
             color: 'white',

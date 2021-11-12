@@ -1,3 +1,4 @@
+
 import React, {useEffect, useRef, useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, Text, View, 
         TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
@@ -18,6 +19,7 @@ const Community =({route, navigation})=>{
     const [writeMode, setWriteMode] = useState(false);
     const { user: {id} } = useContext(UserContext);
 
+
     // 게시물 등록
     const saveMemo = () => { 
         var key = Math.random().toString().replace(".", "");
@@ -37,6 +39,7 @@ const Community =({route, navigation})=>{
                     text1.current.clear();
                 if(text2.current)
                     text2.current.clear();
+
             })
         }
         catch(error){
