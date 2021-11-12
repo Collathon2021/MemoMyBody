@@ -110,8 +110,7 @@ const menu = ({ navigation }) => {
                 {TabButton(currentTab, setCurrentTab, "자유게시판", search, navigation)}
                 {TabButton(currentTab, setCurrentTab, "루틴 및 자세게시판", search, navigation)}
                 {TabButton(currentTab, setCurrentTab, "식단정보게시판", search, navigation)}
-                {TabButton(currentTab, setCurrentTab, "개인기록부 게시판", search, navigation)}
-                {TabButton(currentTab, setCurrentTab, "Best게시판", search, navigation)}  
+                {/*{TabButton(currentTab, setCurrentTab, "Best게시판", search, navigation)}*/}  
                 {TabButton(currentTab, setCurrentTab, "로그아웃", logout, navigation)}
             </View>
         </ScrollView>
