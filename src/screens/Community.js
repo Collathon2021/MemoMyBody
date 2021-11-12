@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, Text, View, 
         TextInput, Button, StatusBar, TouchableOpacity} from 'react-native';
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
+import { UserContext } from '../contexts/UserContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -10,9 +11,10 @@ const Community =({route, navigation})=>{
     const {CommunityType} = route.params
     const [postNumber, setPostNumber] = useState(0);
     const [text, setText] = useState("");
-    const text1 =useRef("");
+    const text1 = useRef("");
     const [data, setData] = useState("");
     const [writeMode, setWriteMode] = useState(false);
+    const { user: {id} } = useContext(UserContext);
 
     const saveMemo = () => {
         var key = Math.random().toString().replace(".", "");
@@ -24,6 +26,7 @@ const Community =({route, navigation})=>{
             .set({
                 memo: memo,
                 regdate: new Date().toString(),
+                UserID: {id},
             }).then(() => {
                 if(text1.current)
                     text1.current.clear();
@@ -90,26 +93,25 @@ const Community =({route, navigation})=>{
     if( writeMode ) { //글쓰기
         return(
             <SafeAreaView style={{flex:1, backgroundColor:'#9c0', }}>
-                <View style={{flex:1, }}>        
+                <View style={{flex:1,}}>        
                     <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                        <TouchableOpacity style={{padding:15, }} onPress={()=>setWriteMode(false)}>
-                            <Text style={{fontSize:18, }}>취소</Text>
+                        <TouchableOpacity style={{padding:15, }} onPress={() => setWriteMode(false) }>
+                            <Text style={{fontSize:18, fontWeight:'bold'}}> 취소 </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{padding:15, }}  onPress={()=>{
-                            saveMemo();
-                            setWriteMode(false);
-                        }} >
-                            <Text style={{fontSize:18, }}>저장</Text>
+                        <TouchableOpacity style={{padding:15, }} onPress={() => {saveMemo(); setWriteMode(false); }}>
+                            <Text style={{fontSize:18, fontWeight:'bold'}}> 저장 </Text>
                         </TouchableOpacity>
                     </View>
+
                     <View style={{flex:1, backgroundColor:'#fff', }}>
                         <TextInput style={{backgroundColor:'#eee', padding:5, flex:1, }}
                             ref ={text1}
+                            
                             onChangeText={text=> setText(text)}
                             multiline
-                            placeholder="내용을 입력해주세요" /> 
+                            placeholder="내용을 입력해주세요" 
+                        /> 
                     </View>
-
                     <StatusBar style="auto" />
                 </View>
             </SafeAreaView>
@@ -117,8 +119,8 @@ const Community =({route, navigation})=>{
     }
 
     return(
-        <View style={{backgroundColor:'#ffffe0', flex:1}}>
-            <SafeAreaView style={{flex:1, }}>
+        <View style={{backgroundColor:'#ffffe0', flex:1}}> 
+            <SafeAreaView style={{flex:1, }}> 
                 <View style={{ padding:15, marginTop: 10}}> 
                     <Text style = {{
                         textAlign:'center', 
@@ -127,20 +129,25 @@ const Community =({route, navigation})=>{
                         color : '#1c1c26' 
                     }}>{CommunityType}</Text>
                 </View> 
-                
-                <View style = {{ 
+           
+                <View style = {{  
                     backgroundColor: '#dcdcdc', 
                     marginTop: 10,
                     marginLeft: 10,
                     marginRight: 10,
                     borderRadius: 15,                    
-                }}>
+                }}> 
                     <FlatList data = {data} renderItem = {renderItem} 
                               style ={{padding: 10,} }
                     />
                 </View>
 
-                <View style={{position:'absolute', right:20, bottom:20, zIndex:10,  }}>
+                <View style={{
+                    position:'absolute',
+                    right:20,
+                    bottom:20,
+                    zIndex:10,  
+                }}>
                     <View style={{
                             width:50, 
                             height:50, 
@@ -148,9 +155,9 @@ const Community =({route, navigation})=>{
                             borderRadius:25,
                             alignItems:'center', 
                             justifyContent:'center', 
-                    }}>          
+                    }}>      
                         <TouchableOpacity onPress={() => setWriteMode(true)}>       
-                        <Text style={{color:'#ffff', }}> 글쓰기 </Text>
+                            <Text style={{color:'#ffff', }}> 글쓰기 </Text>
                         </TouchableOpacity>
                     </View>
                 </View>

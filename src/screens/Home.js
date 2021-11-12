@@ -9,10 +9,9 @@ import formenu from '../assets/ww.png';
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
 const DATA = [
-    { title: 'Best게시판', data : ['1. 하루만에 키가 2미터', '2. 와 오진다'] },
-    { title: '자유게시판', data : ['1. 기타등등', '2. ????'] },
-    { title: '루틴 및 자세게시판', data: ['1. ㅇㅇㅇㅇ', '2. 글좀써줘'] },
-    { title: '식단정보게시판', data : ['Board','21312'] },
+    { title: '루틴 및 자세게시판', data: [''] },
+    { title: '식단정보게시판', data : [''] },
+    { title: '자유게시판', data : [''] },
 ];
 
 const Item = ({ communityType, title, navigation}) => (
@@ -109,11 +108,11 @@ const Home = () => {
             // lightyello #ffffe0  , white #ffffff
         }}>
             <Image source={formenu} style={{
-            width: 80, 
-            height: 80, 
-            marginLeft: 20,
-            borderRadius: 0,
-            marginTop: 7
+                width: 80, 
+                height: 80, 
+                marginLeft: 20,
+                borderRadius: 0,
+                marginTop: 7
              }}></Image>
             <BottomHome data = {data}/>
         </SafeAreaView>
