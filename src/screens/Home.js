@@ -13,6 +13,7 @@ const DATA = [
     { title: '자유게시판', data : ['1. 기타등등', '2. ????'] },
     { title: '루틴 및 자세게시판', data: ['1. ㅇㅇㅇㅇ', '2. 글좀써줘'] },
     { title: '식단정보게시판', data : ['Board','21312'] },
+    { title: '개인기록부 게시판', data : ['Board','21312'] },
 ];
 
 const Item = ({ communityType, title, navigation}) => (

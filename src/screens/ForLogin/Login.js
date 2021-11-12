@@ -53,7 +53,8 @@ const Login = ({ navigation }) => {
                         Alert.alert('Login Success',`환영합니다 ! ${n}님`);
                         setUser({
                             name: n ,
-                            id
+                            id : id,
+                            pw
                         });
                         navigation.navigate('menu');
                     } else {
@@ -101,9 +102,9 @@ const Login = ({ navigation }) => {
                     />
                     <Button 
                         title="Login" 
-                        //onPress={() => _handleLoginButtonPress(email,password)}
-                        //disabled={disabled}
-                        onPress = {() => navigation.navigate('menu')} 
+                        onPress={() => _handleLoginButtonPress(email,password)}
+                        disabled={disabled}
+                        // onPress = {() => navigation.navigate('menu')} 
                     />
                     <Button
                         title="Sign up"
