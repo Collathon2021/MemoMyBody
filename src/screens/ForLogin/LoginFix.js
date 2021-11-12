@@ -40,6 +40,7 @@ const LoginFix = ({navigation}) => {
     const [passwordConfirm,setPasswordConfirm] = useState(pw); 
     const [errorMessage,setErrorMessage] = useState('');
     const [disabled,setDisabled] = useState(true);
+    const { user, setUser } = useContext(UserContext);    
 
     const idRef = useRef();
     const passwordRef = useRef();
@@ -81,8 +82,13 @@ const LoginFix = ({navigation}) => {
                 .update({
                     name : inputedName,
                     userPW : inputedPw
-                }) 
-                Alert.alert('SignUp Success',`${name1}님 환영합니다.`);
+                })
+                 
+                //Alert.alert('LoginFix Success',`${name1}님 환영합니다.`);
+                setUser({
+                    name: inputedName,
+                })
+                Alert.alert('LoginFix Success',`성공적으로 변경되었습니다.`);
                 navigation.navigate('menu');
             } else { 
                 //등록된 유저일 경우
