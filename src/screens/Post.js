@@ -10,12 +10,16 @@ import { ComContext } from '../contexts/ComContext';
 
 const Post = ({navigation}) => {
     const {user: {id,com}} = useContext(UserContext);
-    const {com: {Title,Story,dat}} = useContext(ComContext)
+    const {com: {Title,Story,dat,useri}} = useContext(ComContext)
 
     return(
         <SafeAreaView style={{flex:1, backgroundColor:'#ffffe0', }}>
                 <View style={{flex:1,}}>        
-                    <View style={{flex:1, backgroundColor:'#fff,'}}>
+                    <View style={{
+                        flex:1, 
+                        backgroundColor:'#fff,',
+                        
+                    }}>
                         <Text style={{
                             backgroundColor:'#dcdcdc', 
                             padding:10, 
@@ -26,7 +30,8 @@ const Post = ({navigation}) => {
                             marginRight:10,
                             marginTop: 10,
                         }}>
-                               {Title}                     
+                            {Title}           
+        
                         </Text> 
                     </View>
 
@@ -41,7 +46,9 @@ const Post = ({navigation}) => {
                             marginBottom:10,
                             borderRadius:5,
                         }}>
-                        ▶    {Story} {dat}
+                        {Story} {"\n"}{"\n"}{"\n"}
+                        ✍️ 작성자: {useri}{"\n"}
+                        📆 작성시간: {dat}
                         </Text>
                     </View>
                     <StatusBar style="auto" />

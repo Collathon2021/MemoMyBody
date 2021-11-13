@@ -86,10 +86,11 @@ const Community =({route, navigation})=>{
                         setCom({
                             Title: item.Title,
                             Story: item.memo,
-                            //dat: item.regdate,
+                            dat: item.regdate,
+                            useri: item.useri,
                         })                       
                     }}>
-                        <Text style={{fontSize:17, fontWeight:'bold'}}>▶   {item.Title} </Text>
+                        <Text style={{fontSize:17, fontWeight:'bold'}}>✏️   {item.Title} </Text>
                     </TouchableOpacity>
                     {/*<Button title="삭제" onPress = {() => delMemo(item.key)}/>*/}
                 </View>
@@ -112,7 +113,7 @@ const Community =({route, navigation})=>{
                         Title: child.val().Title,
                         memo: child.val().memo,
                         regdate: child.val().regdate,
-                        //useri : child.val().UserID,
+                        useri : child.val().UserID,
                     });
                 });
                 setData(tmp);
@@ -181,9 +182,10 @@ const Community =({route, navigation})=>{
                     <Text style = {{
                         textAlign:'center', 
                         fontSize: 18,
-                        fontWeight: 'bold', 
+                        fontWeight: 'bold',
+                        marginLeft: -15, 
                         color : '#1c1c26' 
-                    }}>{CommunityType}</Text>
+                    }}>📍{CommunityType}</Text>
                 </View> 
            
                 <View style = {{  
