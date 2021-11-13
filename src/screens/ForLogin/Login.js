@@ -54,7 +54,8 @@ const Login = ({ navigation }) => {
                         setUser({
                             name: n ,
                             id : id,
-                            pw
+                            pw : pw,
+                            Com: '',
                         });
                         navigation.navigate('menu');
                     } else {
@@ -104,9 +105,7 @@ const Login = ({ navigation }) => {
                         title="Login" 
                         onPress={() => _handleLoginButtonPress(email,password)}
                         disabled={disabled}
-
                         //onPress = {() => navigation.navigate('menu')} 
-
                     />
                     <Button
                         title="Sign up"

@@ -7,6 +7,7 @@ export default ({ children }) => {
         name: '',
         UserId: '',
         UserPW: '',
+        Com: '',
     });
 
     return(

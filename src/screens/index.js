@@ -4,6 +4,7 @@ import Home from './Home';
 import Community from './Community';
 import menu from './menu';
 import LoginFix from './ForLogin/LoginFix';
+import Post from './Post';
 
 
 /* import ... from './components'; 이렇게 screen디렉토리의 component를 import할때
@@ -12,4 +13,4 @@ import LoginFix from './ForLogin/LoginFix';
        import ... from './components' 이렇게만 작성 가능하다
 */
 
-export { Login, Signup, Home,  Community, menu, LoginFix};
+export { Login, Signup, Home,  Community, menu, LoginFix, Post};
