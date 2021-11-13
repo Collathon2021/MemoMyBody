@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Signup, Home, Community, menu, LoginFix} from '../screens';
+import { Login, Signup, Home, Community, menu, LoginFix, Post} from '../screens';
 import UserContextProvider from '../contexts/UserContext';
+import ComContextProvider from '../contexts/ComContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -14,6 +15,7 @@ const AuthStack = () => {
     const theme = useContext(ThemeContext);
 
     return(
+        <ComContextProvider>
         <UserContextProvider>
             <Stack.Navigator
                 initialRouteName="Login"
@@ -49,8 +51,13 @@ const AuthStack = () => {
                     name="LoginFix"
                     component={LoginFix}
                 />
+                <Stack.Screen
+                    name="Post"
+                    component={Post}
+                />
             </Stack.Navigator>
-      </UserContextProvider>
+        </UserContextProvider>
+        </ComContextProvider>
     );
 };
 

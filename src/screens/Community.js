@@ -5,6 +5,7 @@ import {SafeAreaView, StyleSheet, Text, View,
 import database, { firebase } from '@react-native-firebase/database';
 import { FlatList } from 'react-native-gesture-handler';
 import { UserContext } from '../contexts/UserContext';
+import { ComContext } from '../contexts/ComContext';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -17,9 +18,11 @@ const Community =({route, navigation})=>{
     const text2 = useRef(""); // 글쓰기 내용
     const [data, setData] = useState("");
     const [writeMode, setWriteMode] = useState(false);
-    const { user: {id} } = useContext(UserContext);
-
-
+    const { user: {id,name,pw} } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
+    const a = 1;
+    const { com, setCom } = useContext(ComContext);
+    
     // 게시물 등록
     const saveMemo = () => { 
         var key = Math.random().toString().replace(".", "");
@@ -39,7 +42,6 @@ const Community =({route, navigation})=>{
                     text1.current.clear();
                 if(text2.current)
                     text2.current.clear();
-
             })
         }
         catch(error){
@@ -61,7 +63,7 @@ const Community =({route, navigation})=>{
     }
 
     const renderItem = ({ item }) => { 
-        return(
+        return(                  
             <SafeAreaView>
                 <View style={{
                     padding:15, 
@@ -69,15 +71,34 @@ const Community =({route, navigation})=>{
                     borderBottomWidth: 1,
                     flexDirection:'row',
                 }}>
-                    <Text style={{flex:1, }}>
+                    {/*<Text style={{flex:1, }}>
                         ▶  {item.memo} 
                     </Text>
+                    */}
+                    <TouchableOpacity style={{padding:7, }} onPress={() => { 
+                        navigation.navigate('Post') ,
+                        setUser({
+                            name: name,
+                            id: id,
+                            pw: pw,
+                            com: CommunityType.toString(),
+                        }),
+                        setCom({
+                            Title: item.Title,
+                            Story: item.memo,
+                            dat: item.regdate,
+                            useri: item.useri,
+                        })                       
+                    }}>
+                        <Text style={{fontSize:17, fontWeight:'bold'}}>✏️   {item.Title} </Text>
+                    </TouchableOpacity>
                     {/*<Button title="삭제" onPress = {() => delMemo(item.key)}/>*/}
                 </View>
             </SafeAreaView>
         )
     }
-
+    // 내용이 보여지는 문제 발생 .. ㅠㅠ.
+    //Title: child.val().Title,
     useEffect(() => {
         var changeDataRef = firebase
                             .database()
@@ -86,11 +107,13 @@ const Community =({route, navigation})=>{
         try{
             changeDataRef.on("value", (snapshot)=>{
                 const tmp = [];
-                snapshot.forEach((child)=>{
+                snapshot.forEach((child) => {
                     tmp.unshift({
                         key : child.key,
+                        Title: child.val().Title,
                         memo: child.val().memo,
                         regdate: child.val().regdate,
+                        useri : child.val().UserID,
                     });
                 });
                 setData(tmp);
@@ -99,7 +122,7 @@ const Community =({route, navigation})=>{
         catch(error){
             alert("not valid");
         }
-    }, [])
+    },[a])
     
     if( writeMode ) { //글쓰기
         return(
@@ -159,9 +182,10 @@ const Community =({route, navigation})=>{
                     <Text style = {{
                         textAlign:'center', 
                         fontSize: 18,
-                        fontWeight: 'bold', 
+                        fontWeight: 'bold',
+                        marginLeft: -15, 
                         color : '#1c1c26' 
-                    }}>{CommunityType}</Text>
+                    }}>📍{CommunityType}</Text>
                 </View> 
            
                 <View style = {{  

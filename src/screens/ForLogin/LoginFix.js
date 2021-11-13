@@ -8,6 +8,7 @@ import { Alert, Image } from 'react-native';
 import db from '../../../test/db';
 import fix from '../../assets/fix.png';
 import { UserContext } from '../../contexts/UserContext';
+import { checkPropTypes } from 'prop-types';
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//
 
@@ -40,14 +41,13 @@ const LoginFix = ({navigation}) => {
     const [passwordConfirm,setPasswordConfirm] = useState(pw); 
     const [errorMessage,setErrorMessage] = useState('');
     const [disabled,setDisabled] = useState(true);
-    const { user, setUser } = useContext(UserContext);    
+    const { user, setUser } = useContext(UserContext); 
+    //const { user: {id}} = useContext(UserContext);   
 
     const idRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    
 
-    
     useEffect(() => {
         let _errorMessage = '';
         if (!name1) { 
@@ -87,6 +87,9 @@ const LoginFix = ({navigation}) => {
                 //Alert.alert('LoginFix Success',`${name1}님 환영합니다.`);
                 setUser({
                     name: inputedName,
+                    id: id,
+                    pw : inputedPw,
+                    Com: '',
                 })
                 Alert.alert('LoginFix Success',`성공적으로 변경되었습니다.`);
                 navigation.navigate('menu');
